@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const [title, closing] = options[action.value];
     const formattedDate = date.value ? date.value.split('-').reverse().join('/') : '(informe a data)';
     const lines = [
-      `\u{1F31E} PÓS-AGENDAMENTO SOLARI — ${title}`, '',
+      `PÓS-AGENDAMENTO SOLARI — ${title}`, '',
       `Olá, Suellen! Meu nome é ${name.value.trim() || '(informe seu nome)'}.`,
       `Data marcada: ${formattedDate}`,
       `Horário marcado: ${time.value || '(informe o horário)'}`

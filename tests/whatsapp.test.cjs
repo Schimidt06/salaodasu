@@ -127,9 +127,9 @@ for (const history of ['Cabelo virgem (sem química)', 'Já tenho coloração / 
     assert.ok(message.includes(history));
     assert.ok(message.includes('João Pedro'));
     assert.ok(message.includes('avaliação, valores e horários'));
-    assert.ok(message.startsWith('\u{1F31E} PRÉ-ATENDIMENTO SOLARI\n\n'));
+    assert.ok(message.startsWith('PRÉ-ATENDIMENTO SOLARI\n\n'));
     assert.doesNotMatch(message, /\uFFFD/u);
-    assert.doesNotMatch(message.split('\n').slice(1).join('\n'), /\p{Extended_Pictographic}/u);
+    assert.doesNotMatch(message, /\p{Extended_Pictographic}/u);
     assert.equal(message, element('whatsapp-preview-text').textContent);
   });
 }

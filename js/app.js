@@ -195,7 +195,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const name = state.client.name.trim() || 'Cliente';
     const totalServices = state.selectedServices.size;
 
-    let msg = `\u{1F31E} PRÉ-ATENDIMENTO SOLARI\n\n`;
+    let msg = `PRÉ-ATENDIMENTO SOLARI\n\n`;
     msg += `Olá, Suellen! Meu nome é *${name}*.\n`;
     msg += `Gostaria de agendar / consultar serviços para o meu cabelo no salão:\n\n`;
 

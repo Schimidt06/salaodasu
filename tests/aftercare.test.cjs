@@ -42,7 +42,8 @@ for (const [action, closing] of [
     assert.equal(urls.length, 1);
     assert.equal(urls[0].pathname, '/5514998063662');
     const text = urls[0].searchParams.get('text');
-    assert.ok(text.includes('PÓS-AGENDAMENTO SOLARI'));
+    assert.ok(text.startsWith('PÓS-AGENDAMENTO SOLARI'));
+    assert.doesNotMatch(text, /[\uFFFD\p{Extended_Pictographic}]/u);
     assert.ok(text.includes('João Pedro'));
     assert.ok(text.includes('03/10/2026'));
     assert.ok(text.includes('14:30'));
