@@ -129,8 +129,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     fields.forEach(({ el, key }) => {
       if (!el) return;
-      el.addEventListener('input', (e) => {
-        state.client[key] = e.target.value.trim();
+      const updateField = () => {
+        state.client[key] = el.value.trim();
 
         if (key === 'name' && nameError) {
           if (state.client.name) {
@@ -140,18 +140,27 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         updateWhatsAppMessage();
-      });
+      };
 
-      if (el.tagName === 'SELECT') {
-        el.addEventListener('change', () => updateWhatsAppMessage());
-      }
+      el.addEventListener('input', updateField);
+      el.addEventListener('change', updateField);
     });
+  }
+
+  function syncClientFromForm() {
+    state.client.name = inputName.value.trim();
+    state.client.length = selectLength.value.trim();
+    state.client.colorCurrent = selectColorCurrent.value.trim();
+    state.client.colorGoal = selectColorGoal.value.trim();
+    state.client.history = selectHistory.value.trim();
+    state.client.notes = textareaNotes.value.trim();
   }
 
   /**
    * 5. Formata a mensagem limpa para o WhatsApp
    */
   function generateWhatsAppMessageText() {
+    syncClientFromForm();
     const name = state.client.name.trim() || 'Cliente';
     const totalServices = state.selectedServices.size;
 
@@ -222,6 +231,7 @@ document.addEventListener('DOMContentLoaded', () => {
    * 8. Ação de Enviar no WhatsApp
    */
   function handleSendWhatsApp() {
+    syncClientFromForm();
     const name = state.client.name.trim();
     const totalCount = state.selectedServices.size + (state.wantsOrientation ? 1 : 0);
 
@@ -249,7 +259,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const encoded = encodeURIComponent(message);
     const url = `https://wa.me/${WHATSAPP_PHONE}?text=${encoded}`;
 
-    window.open(url, '_blank', 'noopener,noreferrer');
+    // Navegação direta também funciona quando novas janelas são bloqueadas.
+    window.location.assign(url);
   }
 
   if (btnSendWhatsApp) {
@@ -257,17 +268,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   if (btnFloatingSend) {
-    btnFloatingSend.addEventListener('click', () => {
-      if (!state.client.name.trim()) {
-        if (inputName) {
-          inputName.focus();
-          inputName.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          showToast('Preencha seu nome para finalizar!');
-        }
-      } else {
-        handleSendWhatsApp();
-      }
-    });
+    btnFloatingSend.addEventListener('click', handleSendWhatsApp);
   }
 
   /**
