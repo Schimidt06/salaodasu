@@ -7,7 +7,7 @@
   <meta name="description" content="Selecione os serviços capilares e envie sua consulta diretamente para a Suellen Bailon no WhatsApp.">
   <meta name="theme-color" content="#F8F6F2">
 
-  <link rel="stylesheet" href="css/style.css?v=20260929-2">
+  <link rel="stylesheet" href="css/style.css?v=20260929-4">
   <link rel="icon" type="image/jpeg" href="assets/solari-marca.jpg">
 </head>
 <body>
@@ -35,6 +35,47 @@
       <h2>O que vamos fazer no seu cabelo?</h2>
       <p>Marque os serviços que você deseja, informe o tamanho e a cor do seu cabelo, e clique no botão final para me enviar tudo prontinho no WhatsApp!</p>
     </div>
+
+    <details class="section-card aftercare" id="aftercare">
+      <summary>Já tenho um horário marcado <span>Pós-agendamento: reagendar, cancelar ou avisar sobre atraso</span></summary>
+      <form id="aftercare-form" novalidate>
+        <div class="form-group">
+          <label class="form-label" for="appointment-action">Como podemos ajudar? <span class="req-star">*</span></label>
+          <select class="form-select" id="appointment-action" required aria-describedby="appointment-error">
+            <option value="">Escolha uma opção...</option>
+            <option value="reschedule">Quero reagendar meu horário</option>
+            <option value="cancel">Quero cancelar meu horário</option>
+            <option value="late">Estou atrasada / preciso falar sobre meu horário</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="appointment-name">Nome <span class="req-star">*</span></label>
+          <input class="form-input" id="appointment-name" autocomplete="name" required minlength="2" maxlength="80" aria-describedby="appointment-error">
+        </div>
+        <div class="form-grid grid-2">
+          <div class="form-group">
+            <label class="form-label" for="appointment-date">Data marcada <span class="req-star">*</span></label>
+            <input class="form-input" type="date" id="appointment-date" required min="1900-01-01" max="9999-12-31" aria-describedby="appointment-error">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="appointment-time">Horário marcado <span class="req-star">*</span></label>
+            <input class="form-input" type="time" id="appointment-time" required aria-describedby="appointment-error">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" id="appointment-note-label" for="appointment-note">Motivo (opcional)</label>
+          <textarea class="form-textarea" id="appointment-note" maxlength="300" rows="3" aria-describedby="appointment-error"></textarea>
+        </div>
+        <p class="error-text" id="appointment-error" role="alert"></p>
+        <div class="preview-box">
+          <div class="preview-label">Sua mensagem no WhatsApp</div>
+          <div class="preview-text" id="appointment-preview">Escolha uma opção e preencha os dados do seu horário.</div>
+        </div>
+        <p class="aftercare-notice" id="appointment-notice">Reagendamentos e cancelamentos serão confirmados pela Suellen pelo WhatsApp, conforme disponibilidade da agenda. Seu horário só será alterado após essa confirmação.</p>
+        <button class="btn-whatsapp" type="submit" aria-describedby="appointment-notice">Continuar no WhatsApp</button>
+        <p class="disclaimer-note">A mensagem será preenchida no WhatsApp. Toque em Enviar para falar com a Suellen.</p>
+      </form>
+    </details>
 
     <!-- PASSO 1: Nome -->
     <section class="section-card">
@@ -208,5 +249,6 @@
   <!-- Scripts -->
   <script src="js/catalog-data.js"></script>
   <script src="js/app.js?v=20260929-3" charset="utf-8"></script>
+  <script src="js/aftercare.js?v=20260929-4" charset="utf-8"></script>
 </body>
 </html>

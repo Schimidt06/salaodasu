@@ -260,6 +260,7 @@ body {
 }
 
 .form-input.input-error,
+.form-textarea.input-error,
 .form-select.input-error {
   border-color: var(--danger);
   background: var(--danger-bg);
@@ -575,3 +576,39 @@ body {
   color: var(--text-light);
   margin-top: 24px;
 }
+
+.aftercare summary {
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--accent-gold);
+  padding: 4px 0;
+}
+.aftercare summary span {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+.aftercare form { margin-top: 20px; }
+.aftercare .form-group { min-width: 0; margin-bottom: 16px; }
+.aftercare input, .aftercare select, .aftercare textarea {
+  min-width: 0;
+  max-width: 100%;
+  font-family: var(--font-sans);
+}
+.aftercare .preview-label { color: var(--wa-dark-hover); }
+.aftercare .btn-whatsapp {
+  background: var(--wa-dark-hover);
+  box-shadow: var(--shadow-sm);
+  transition: opacity 0.15s ease;
+}
+.aftercare .btn-whatsapp:hover { opacity: 0.9; transform: none; }
+.aftercare-notice {
+  margin: 16px 0;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+.aftercare :focus-visible { outline: 2px solid var(--accent-gold); outline-offset: 3px; }
+body:has(#aftercare[open]) .floating-bar { display: none !important; }
