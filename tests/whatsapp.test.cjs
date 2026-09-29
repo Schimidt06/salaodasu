@@ -117,7 +117,7 @@ for (const name of [' ', 'A', '123456', 'Ana123', 'João 💛']) {
 }
 
 for (const history of ['Cabelo virgem (sem química)', 'Já tenho coloração / tintura', 'Mais de um procedimento químico', 'Não tenho certeza']) {
-  test(`preserva histórico e texto sem emojis: ${history}`, () => {
+  test(`preserva histórico, acentos e identificação Solari: ${history}`, () => {
     const { element, destinations } = loadApp();
     fillRequired(element);
     element('select-history').value = history;
@@ -127,7 +127,9 @@ for (const history of ['Cabelo virgem (sem química)', 'Já tenho coloração / 
     assert.ok(message.includes(history));
     assert.ok(message.includes('João Pedro'));
     assert.ok(message.includes('avaliação, valores e horários'));
-    assert.doesNotMatch(message, /[\uFFFD\p{Extended_Pictographic}]/u);
+    assert.ok(message.startsWith('\u{1F31E} PRÉ-ATENDIMENTO SOLARI\n\n'));
+    assert.doesNotMatch(message, /\uFFFD/u);
+    assert.doesNotMatch(message.split('\n').slice(1).join('\n'), /\p{Extended_Pictographic}/u);
     assert.equal(message, element('whatsapp-preview-text').textContent);
   });
 }
