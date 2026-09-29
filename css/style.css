@@ -577,19 +577,6 @@ body {
   margin-top: 24px;
 }
 
-.aftercare summary {
-  cursor: pointer;
-  font-weight: 700;
-  color: var(--accent-gold);
-  padding: 4px 0;
-}
-.aftercare summary span {
-  display: block;
-  margin-top: 6px;
-  font-size: 0.8rem;
-  font-weight: 400;
-  color: var(--text-muted);
-}
 .aftercare form { margin-top: 20px; }
 .aftercare .form-group { min-width: 0; margin-bottom: 16px; }
 .aftercare input, .aftercare select, .aftercare textarea {
@@ -611,4 +598,26 @@ body {
   line-height: 1.6;
 }
 .aftercare :focus-visible { outline: 2px solid var(--accent-gold); outline-offset: 3px; }
-body:has(#aftercare[open]) .floating-bar { display: none !important; }
+body:has(#assessment[hidden]) .floating-bar { display: none !important; }
+[hidden] { display: none !important; }
+.entry-options { display: grid; gap: 12px; }
+.entry-option {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 14px;
+  padding: 20px 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  color: var(--text-main);
+  text-decoration: none;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+.entry-option:hover { border-color: var(--accent-gold); background: var(--bg-selected); }
+.entry-option strong { display: block; font-size: 0.95rem; }
+.entry-option small { display: block; color: var(--text-muted); margin-top: 5px; font-size: 0.8rem; }
+.entry-icon { font-size: 1.4rem; }
+.back-to-menu { display: inline-block; padding: 12px 0; margin-bottom: 12px; color: var(--accent-gold); font-size: 0.85rem; }
+.entry-option:focus-visible, .back-to-menu:focus-visible { outline: 2px solid var(--accent-gold); outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) { .entry-option { transition: none; } }

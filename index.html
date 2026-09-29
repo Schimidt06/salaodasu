@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <title>Suellen Bailon — Escolha seus Serviços de Cabelo</title>
-  <meta name="description" content="Selecione os serviços capilares e envie sua consulta diretamente para a Suellen Bailon no WhatsApp.">
+  <title>Suellen Bailon — Atendimento Solari</title>
+  <meta name="description" content="Solicite uma avaliação capilar, reagende, cancele ou fale sobre seu horário com a Suellen Bailon pelo WhatsApp.">
   <meta name="theme-color" content="#F8F6F2">
 
-  <link rel="stylesheet" href="css/style.css?v=20260929-4">
+  <link rel="stylesheet" href="css/style.css?v=20260929-5">
   <link rel="icon" type="image/jpeg" href="assets/solari-marca.jpg">
 </head>
 <body>
@@ -29,17 +29,26 @@
       </a>
     </header>
 
-    <!-- Intro Box -->
-    <div class="intro-box">
-      <span class="intro-badge">Atendimento Rápido</span>
-      <h2>O que vamos fazer no seu cabelo?</h2>
-      <p>Marque os serviços que você deseja, informe o tamanho e a cor do seu cabelo, e clique no botão final para me enviar tudo prontinho no WhatsApp!</p>
-    </div>
+    <main>
+    <section id="welcome" aria-labelledby="welcome-title">
+      <div class="intro-box">
+        <span class="intro-badge">Atendimento Solari</span>
+        <h2 id="welcome-title" tabindex="-1">Como podemos te ajudar?</h2>
+        <p>Escolha o que você precisa para continuar o atendimento com a Suellen.</p>
+      </div>
+      <nav class="entry-options" aria-label="Opções de atendimento">
+        <a class="entry-option" href="#avaliacao"><span class="entry-icon" aria-hidden="true">✨</span><span><strong>Quero fazer uma avaliação</strong><small>Novo atendimento / orçamento.</small></span><span aria-hidden="true">→</span></a>
+        <a class="entry-option" href="#reagendar"><span class="entry-icon" aria-hidden="true">📅</span><span><strong>Já tenho horário e preciso reagendar</strong><small>Envia solicitação para a Suellen.</small></span><span aria-hidden="true">→</span></a>
+        <a class="entry-option" href="#cancelar"><span class="entry-icon" aria-hidden="true">❌</span><span><strong>Quero cancelar meu horário</strong><small>Envia solicitação de cancelamento.</small></span><span aria-hidden="true">→</span></a>
+        <a class="entry-option" href="#horario"><span class="entry-icon" aria-hidden="true">⏰</span><span><strong>Estou atrasada ou preciso falar sobre meu horário</strong><small>Envia uma mensagem organizada sobre aquele agendamento.</small></span><span aria-hidden="true">→</span></a>
+      </nav>
+    </section>
+    <a class="back-to-menu" id="back-to-menu" href="#inicio" hidden>← Voltar às opções de atendimento</a>
 
-    <details class="section-card aftercare" id="aftercare">
-      <summary>Já tenho um horário marcado <span>Pós-agendamento: reagendar, cancelar ou avisar sobre atraso</span></summary>
+    <section class="section-card aftercare" id="aftercare" aria-labelledby="aftercare-title" hidden>
+      <h2 class="section-title" id="aftercare-title" tabindex="-1">Sobre meu horário</h2>
       <form id="aftercare-form" novalidate>
-        <div class="form-group">
+        <div class="form-group" hidden>
           <label class="form-label" for="appointment-action">Como podemos ajudar? <span class="req-star">*</span></label>
           <select class="form-select" id="appointment-action" required aria-describedby="appointment-error">
             <option value="">Escolha uma opção...</option>
@@ -75,8 +84,14 @@
         <button class="btn-whatsapp" type="submit" aria-describedby="appointment-notice">Continuar no WhatsApp</button>
         <p class="disclaimer-note">A mensagem será preenchida no WhatsApp. Toque em Enviar para falar com a Suellen.</p>
       </form>
-    </details>
+    </section>
 
+    <div id="assessment" hidden>
+    <div class="intro-box">
+      <span class="intro-badge">Novo atendimento</span>
+      <h2 id="assessment-title" tabindex="-1">Vamos fazer sua pré-avaliação?</h2>
+      <p>Escolha os serviços e conte sobre seu cabelo. A Suellen continuará sua avaliação pelo WhatsApp.</p>
+    </div>
     <!-- PASSO 1: Nome -->
     <section class="section-card">
       <div class="section-title">
@@ -224,6 +239,9 @@
 
     </section>
 
+    </div>
+    </main>
+    <noscript><p class="section-card">Ative o JavaScript para escolher seu atendimento ou <a href="https://wa.me/5514998063662">fale diretamente com a Suellen no WhatsApp</a>.</p></noscript>
     <!-- Footer -->
     <footer class="app-footer">
       <p>Suellen Bailon • Solari · WhatsApp: (14) 99806-3662</p>
@@ -250,5 +268,6 @@
   <script src="js/catalog-data.js"></script>
   <script src="js/app.js?v=20260929-3" charset="utf-8"></script>
   <script src="js/aftercare.js?v=20260929-4" charset="utf-8"></script>
+  <script src="js/navigation.js?v=20260929-5" charset="utf-8"></script>
 </body>
 </html>
