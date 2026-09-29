@@ -7,7 +7,7 @@
   <meta name="description" content="Selecione os serviços capilares e envie sua consulta diretamente para a Suellen Bailon no WhatsApp.">
   <meta name="theme-color" content="#F8F6F2">
 
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css?v=20260929-2">
   <link rel="icon" type="image/jpeg" href="assets/solari-marca.jpg">
 </head>
 <body>
@@ -45,8 +45,8 @@
 
       <div class="form-group">
         <label for="input-name" class="form-label">Seu Nome <span class="req-star">*</span></label>
-        <input type="text" id="input-name" class="form-input" placeholder="Digite seu primeiro nome (ex: Ana)" required maxlength="80" autocomplete="given-name">
-        <span class="error-text" id="name-error">Por favor, preencha seu nome para continuar.</span>
+        <input type="text" id="input-name" class="form-input" placeholder="Digite seu primeiro nome (ex: Ana)" required minlength="2" maxlength="80" autocomplete="given-name" aria-describedby="name-error">
+        <span class="error-text" id="name-error" aria-live="polite">Informe seu nome com pelo menos 2 letras, sem números ou emojis.</span>
       </div>
     </section>
 
@@ -58,7 +58,7 @@
       </div>
 
       <!-- Card de Orientação -->
-      <div class="orientation-toggle-card" id="orientation-toggle">
+      <div class="orientation-toggle-card" id="orientation-toggle" tabindex="0" role="checkbox" aria-checked="false" aria-describedby="selection-error">
         <div class="check-box-indicator" id="orientation-indicator"></div>
         <div class="orientation-content">
           <h3>Ainda não tenho certeza • Quero orientação da Suellen</h3>
@@ -67,6 +67,7 @@
       </div>
 
       <!-- Lista de Serviços por Categoria -->
+      <span class="error-text" id="selection-error" aria-live="polite">Selecione ao menos um serviço ou peça orientação.</span>
       <div id="services-catalog-root">
         <!-- Renderizado dinamicamente pelo JS -->
       </div>
@@ -83,20 +84,21 @@
         
         <!-- Tamanho Atual -->
         <div class="form-group">
-          <label for="select-length" class="form-label">Tamanho Atual do Cabelo</label>
-          <select id="select-length" class="form-select">
+          <label for="select-length" class="form-label">Tamanho Atual do Cabelo <span class="req-star">*</span></label>
+          <select id="select-length" class="form-select" required aria-describedby="length-error">
             <option value="">Selecione o tamanho...</option>
             <option value="Curto (acima do ombro)">Curto (acima do ombro)</option>
             <option value="Médio (na altura do ombro)">Médio (altura do ombro)</option>
             <option value="Longo (abaixo do ombro)">Longo (abaixo do ombro)</option>
             <option value="Extra Longo (na cintura)">Extra Longo (na cintura)</option>
           </select>
+          <span class="error-text" id="length-error" aria-live="polite">Informe o tamanho atual do cabelo.</span>
         </div>
 
         <!-- Cor Atual -->
         <div class="form-group">
-          <label for="select-color-current" class="form-label">Cor Atual dos Fios</label>
-          <select id="select-color-current" class="form-select">
+          <label for="select-color-current" class="form-label">Cor Atual dos Fios <span class="req-star">*</span></label>
+          <select id="select-color-current" class="form-select" required aria-describedby="color-current-error">
             <option value="">Selecione a cor atual...</option>
             <option value="Castanho / Preto">Castanho / Preto</option>
             <option value="Loiro">Loiro</option>
@@ -105,12 +107,13 @@
             <option value="Grisalho / Branco">Grisalho / Branco</option>
             <option value="Colorido / Fantasia">Colorido / Fantasia</option>
           </select>
+          <span class="error-text" id="color-current-error" aria-live="polite">Informe a cor atual dos fios.</span>
         </div>
 
         <!-- O que deseja fazer com a cor -->
         <div class="form-group">
-          <label for="select-color-goal" class="form-label">O que deseja fazer com a cor?</label>
-          <select id="select-color-goal" class="form-select">
+          <label for="select-color-goal" class="form-label">O que deseja fazer com a cor? <span class="req-star" id="color-goal-required" hidden>*</span></label>
+          <select id="select-color-goal" class="form-select" aria-describedby="color-goal-error">
             <option value="">Selecione o objetivo...</option>
             <option value="Manter a cor natural/atual">Manter a cor natural / atual</option>
             <option value="Clarear / Iluminar">Clarear / Fazer Mechas</option>
@@ -118,14 +121,16 @@
             <option value="Cobrir fios brancos">Cobrir fios brancos</option>
             <option value="Mudar de tom / Tonalizar">Mudar de tom / Tonalizar</option>
             <option value="Não pretendo mexer na cor">Não vou mexer na cor</option>
+            <option value="Quero orientação sobre a cor">Quero orientação sobre a cor</option>
           </select>
+          <span class="error-text" id="color-goal-error" aria-live="polite">Informe seu objetivo ou escolha orientação para o serviço de cor.</span>
         </div>
 
         <!-- Histórico Químico -->
         <div class="form-group">
-          <label for="select-history" class="form-label">Histórico de Química</label>
-          <select id="select-history" class="form-select">
-            <option value="">Possui química?</option>
+          <label for="select-history" class="form-label">Seu cabelo é virgem ou tem química? <span class="req-star">*</span></label>
+          <select id="select-history" class="form-select" required aria-describedby="history-help history-error">
+            <option value="">Selecione o histórico...</option>
             <option value="Cabelo virgem (sem química)">Cabelo 100% virgem</option>
             <option value="Já tenho mechas / luzes">Já tenho mechas / luzes</option>
             <option value="Já tenho coloração / tintura">Já tenho coloração / tintura</option>
@@ -133,6 +138,8 @@
             <option value="Mais de um procedimento químico">Mais de um procedimento</option>
             <option value="Não tenho certeza">Não tenho certeza</option>
           </select>
+          <small id="history-help">Considere também químicas antigas nas pontas. Se não souber, escolha “Não tenho certeza” para avaliação da Suellen.</small>
+          <span class="error-text" id="history-error" aria-live="polite">Informe se o cabelo é virgem, possui química ou se você não tem certeza.</span>
         </div>
 
         <!-- Observações Opcionais -->
@@ -199,6 +206,6 @@
 
   <!-- Scripts -->
   <script src="js/catalog-data.js"></script>
-  <script src="js/app.js?v=20260929-1"></script>
+  <script src="js/app.js?v=20260929-2" charset="utf-8"></script>
 </body>
 </html>

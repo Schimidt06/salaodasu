@@ -28,7 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const orientationIndicator = document.getElementById('orientation-indicator');
 
   const inputName = document.getElementById('input-name');
-  const nameError = document.getElementById('name-error');
   const selectLength = document.getElementById('select-length');
   const selectColorCurrent = document.getElementById('select-color-current');
   const selectColorGoal = document.getElementById('select-color-goal');
@@ -43,6 +42,36 @@ document.addEventListener('DOMContentLoaded', () => {
   const floatingItemsCount = document.getElementById('floating-items-count');
   const btnFloatingSend = document.getElementById('btn-floating-send');
   const toastElement = document.getElementById('toast-element');
+  let validationAttempted = false;
+
+  function requiresColorGoal() {
+    return Array.from(state.selectedServices.values()).some(service =>
+      ['Mechas & Iluminação', 'Coloração & Tonalização'].includes(service.category));
+  }
+
+  function validateFields() {
+    syncClientFromForm();
+    const name = state.client.name;
+    const validName = name.length <= 80 && (name.match(/\p{L}/gu) || []).length >= 2 &&
+      /^[\p{L}\p{M} .’'&-]+$/u.test(name);
+    const rules = [
+      [inputName, 'name-error', validName],
+      [selectLength, 'length-error', Boolean(state.client.length)],
+      [selectColorCurrent, 'color-current-error', Boolean(state.client.colorCurrent)],
+      [selectHistory, 'history-error', Boolean(state.client.history)],
+      [selectColorGoal, 'color-goal-error', !requiresColorGoal() || Boolean(state.client.colorGoal)]
+    ];
+    let firstInvalid = null;
+    rules.forEach(([field, errorId, valid]) => {
+      field.classList.toggle('input-error', !valid);
+      field.setAttribute('aria-invalid', String(!valid));
+      document.getElementById(errorId).classList.toggle('visible', !valid);
+      if (!valid && !firstInvalid) firstInvalid = field;
+    });
+    const selectionValid = state.selectedServices.size > 0 || state.wantsOrientation;
+    document.getElementById('selection-error').classList.toggle('visible', !selectionValid);
+    return firstInvalid || (selectionValid ? null : orientationToggle);
+  }
 
   /**
    * 1. Renderiza o catálogo de serviços de forma limpa e direta
@@ -109,8 +138,15 @@ document.addEventListener('DOMContentLoaded', () => {
     orientationToggle.addEventListener('click', () => {
       state.wantsOrientation = !state.wantsOrientation;
       orientationToggle.classList.toggle('checked', state.wantsOrientation);
+      orientationToggle.setAttribute('aria-checked', String(state.wantsOrientation));
       orientationIndicator.innerHTML = state.wantsOrientation ? CHECK_ICON_SVG : '';
       updateUI();
+    });
+    orientationToggle.addEventListener('keydown', event => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        orientationToggle.click();
+      }
     });
   }
 
@@ -132,12 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const updateField = () => {
         state.client[key] = el.value.trim();
 
-        if (key === 'name' && nameError) {
-          if (state.client.name) {
-            nameError.classList.remove('visible');
-            inputName.classList.remove('input-error');
-          }
-        }
+        if (validationAttempted) validateFields();
 
         updateWhatsAppMessage();
       };
@@ -164,11 +195,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const name = state.client.name.trim() || 'Cliente';
     const totalServices = state.selectedServices.size;
 
-    let msg = `Olá, Suellen! ✨ Meu nome é *${name}*.\n`;
+    let msg = `Olá, Suellen! Meu nome é *${name}*.\n`;
     msg += `Gostaria de agendar / consultar serviços para o meu cabelo no salão:\n\n`;
 
     // Serviços
-    msg += `💇‍♀️ *Serviços de interesse:*\n`;
+    msg += `*Serviços de interesse:*\n`;
     if (state.wantsOrientation) {
       msg += `• *Quero orientação / avaliação personalizada da Suellen*\n`;
     }
@@ -185,7 +216,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const hasDetails = state.client.length || state.client.colorCurrent || state.client.colorGoal || state.client.history || state.client.notes;
 
     if (hasDetails) {
-      msg += `\n📋 *Sobre o meu cabelo:*\n`;
+      msg += `\n*Sobre o meu cabelo:*\n`;
       if (state.client.length) msg += `• *Tamanho atual:* ${state.client.length}\n`;
       if (state.client.colorCurrent) msg += `• *Cor atual:* ${state.client.colorCurrent}\n`;
       if (state.client.colorGoal) msg += `• *Objetivo com a cor:* ${state.client.colorGoal}\n`;
@@ -193,7 +224,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (state.client.notes) msg += `• *Observações:* ${state.client.notes}\n`;
     }
 
-    msg += `\nPoderia me orientar sobre a avaliação, valores e horários disponíveis? 💛`;
+    msg += `\nPoderia me orientar sobre a avaliação, valores e horários disponíveis?`;
 
     return msg;
   }
@@ -210,6 +241,9 @@ document.addEventListener('DOMContentLoaded', () => {
    * 7. Atualiza contadores e barra flutuante
    */
   function updateUI() {
+    selectColorGoal.required = requiresColorGoal();
+    document.getElementById('color-goal-required').hidden = !selectColorGoal.required;
+    if (validationAttempted) validateFields();
     const totalCount = state.selectedServices.size + (state.wantsOrientation ? 1 : 0);
 
     // Barra flutuante mobile
@@ -231,29 +265,7 @@ document.addEventListener('DOMContentLoaded', () => {
    * 8. Ação de Enviar no WhatsApp
    */
   function handleSendWhatsApp() {
-    syncClientFromForm();
-    const name = state.client.name.trim();
-    const totalCount = state.selectedServices.size + (state.wantsOrientation ? 1 : 0);
-
-    if (!name) {
-      if (nameError) nameError.classList.add('visible');
-      if (inputName) {
-        inputName.classList.add('input-error');
-        inputName.focus();
-        inputName.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
-      showToast('Por favor, informe seu nome!');
-      return;
-    }
-
-    if (totalCount === 0) {
-      showToast('Selecione ao menos 1 serviço ou peça orientação!');
-      const target = orientationToggle || catalogRoot;
-      if (target) {
-        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
-      return;
-    }
+    if (!validateBeforeSend()) return;
 
     const message = generateWhatsAppMessageText();
     const encoded = encodeURIComponent(message);
@@ -261,6 +273,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Navegação direta também funciona quando novas janelas são bloqueadas.
     window.location.assign(url);
+  }
+
+  function validateBeforeSend() {
+    validationAttempted = true;
+    const invalidField = validateFields();
+    if (!invalidField) return true;
+    invalidField.focus();
+    invalidField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    showToast('Confira os campos obrigatórios destacados antes de continuar.');
+    return false;
   }
 
   if (btnSendWhatsApp) {
@@ -276,6 +298,7 @@ document.addEventListener('DOMContentLoaded', () => {
    */
   if (btnCopyText) {
     btnCopyText.addEventListener('click', async () => {
+      if (!validateBeforeSend()) return;
       const msg = generateWhatsAppMessageText();
       try {
         await navigator.clipboard.writeText(msg);

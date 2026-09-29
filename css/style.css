@@ -259,7 +259,8 @@ body {
   box-shadow: 0 0 0 3px var(--accent-soft);
 }
 
-.form-input.input-error {
+.form-input.input-error,
+.form-select.input-error {
   border-color: var(--danger);
   background: var(--danger-bg);
 }
