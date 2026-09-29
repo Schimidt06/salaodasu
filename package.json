@@ -1,0 +1,20 @@
+{
+  "name": "suellen-cabelos-atendimento",
+  "version": "1.0.0",
+  "description": "Sistema de triagem capilar e pré-atendimento inteligente para WhatsApp da Suellen Bailon",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx -y serve -l 8080 .",
+    "start": "npx -y serve -l 8080 .",
+    "serve": "npx -y serve ."
+  },
+  "keywords": [
+    "salao",
+    "cabelos",
+    "whatsapp",
+    "agendamento",
+    "suellen-bailon"
+  ],
+  "author": "Antigravity",
+  "license": "ISC"
+}

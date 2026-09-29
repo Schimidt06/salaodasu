@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Suellen Bailon — Escolha seus Serviços de Cabelo</title>
+  <meta name="description" content="Selecione os serviços capilares e envie sua consulta diretamente para a Suellen Bailon no WhatsApp.">
+  <meta name="theme-color" content="#F8F6F2">
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/jpeg" href="assets/solari-marca.jpg">
+</head>
+<body>
+
+  <div class="app-container">
+
+    <!-- Header Minimalista -->
+    <header class="app-header">
+      <div class="brand-wrapper">
+        <img src="assets/solari-marca.jpg" alt="Logo Solari" class="brand-logo-small">
+        <div class="brand-info">
+          <h1>Suellen Bailon</h1>
+          <p>Solari • Especialista em Cabelo</p>
+        </div>
+      </div>
+
+      <a href="https://www.instagram.com/suellenbailon_solari/" target="_blank" rel="noopener noreferrer" class="instagram-link-small" aria-label="Instagram da Suellen Bailon" title="Ver Instagram">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+      </a>
+    </header>
+
+    <!-- Intro Box -->
+    <div class="intro-box">
+      <span class="intro-badge">Atendimento Rápido</span>
+      <h2>O que vamos fazer no seu cabelo?</h2>
+      <p>Marque os serviços que você deseja, informe o tamanho e a cor do seu cabelo, e clique no botão final para me enviar tudo prontinho no WhatsApp!</p>
+    </div>
+
+    <!-- PASSO 1: Nome -->
+    <section class="section-card">
+      <div class="section-title">
+        <span class="step-indicator">1</span>
+        <span>Como posso te chamar?</span>
+      </div>
+
+      <div class="form-group">
+        <label for="input-name" class="form-label">Seu Nome <span class="req-star">*</span></label>
+        <input type="text" id="input-name" class="form-input" placeholder="Digite seu primeiro nome (ex: Ana)" required maxlength="80" autocomplete="given-name">
+        <span class="error-text" id="name-error">Por favor, preencha seu nome para continuar.</span>
+      </div>
+    </section>
+
+    <!-- PASSO 2: Serviços de Cabelo -->
+    <section class="section-card">
+      <div class="section-title">
+        <span class="step-indicator">2</span>
+        <span>Escolha os Serviços</span>
+      </div>
+
+      <!-- Card de Orientação -->
+      <div class="orientation-toggle-card" id="orientation-toggle">
+        <div class="check-box-indicator" id="orientation-indicator"></div>
+        <div class="orientation-content">
+          <h3>Ainda não tenho certeza • Quero orientação da Suellen</h3>
+          <p>Marque aqui se quiser que a Suellen faça uma avaliação personalizada na conversa do WhatsApp.</p>
+        </div>
+      </div>
+
+      <!-- Lista de Serviços por Categoria -->
+      <div id="services-catalog-root">
+        <!-- Renderizado dinamicamente pelo JS -->
+      </div>
+    </section>
+
+    <!-- PASSO 3: Detalhes do Cabelo -->
+    <section class="section-card">
+      <div class="section-title">
+        <span class="step-indicator">3</span>
+        <span>Sobre o seu Cabelo</span>
+      </div>
+
+      <div class="form-grid grid-2">
+        
+        <!-- Tamanho Atual -->
+        <div class="form-group">
+          <label for="select-length" class="form-label">Tamanho Atual do Cabelo</label>
+          <select id="select-length" class="form-select">
+            <option value="">Selecione o tamanho...</option>
+            <option value="Curto (acima do ombro)">Curto (acima do ombro)</option>
+            <option value="Médio (na altura do ombro)">Médio (altura do ombro)</option>
+            <option value="Longo (abaixo do ombro)">Longo (abaixo do ombro)</option>
+            <option value="Extra Longo (na cintura)">Extra Longo (na cintura)</option>
+          </select>
+        </div>
+
+        <!-- Cor Atual -->
+        <div class="form-group">
+          <label for="select-color-current" class="form-label">Cor Atual dos Fios</label>
+          <select id="select-color-current" class="form-select">
+            <option value="">Selecione a cor atual...</option>
+            <option value="Castanho / Preto">Castanho / Preto</option>
+            <option value="Loiro">Loiro</option>
+            <option value="Morena Iluminada">Morena Iluminada</option>
+            <option value="Ruivo / Acobreado">Ruivo / Acobreado</option>
+            <option value="Grisalho / Branco">Grisalho / Branco</option>
+            <option value="Colorido / Fantasia">Colorido / Fantasia</option>
+          </select>
+        </div>
+
+        <!-- O que deseja fazer com a cor -->
+        <div class="form-group">
+          <label for="select-color-goal" class="form-label">O que deseja fazer com a cor?</label>
+          <select id="select-color-goal" class="form-select">
+            <option value="">Selecione o objetivo...</option>
+            <option value="Manter a cor natural/atual">Manter a cor natural / atual</option>
+            <option value="Clarear / Iluminar">Clarear / Fazer Mechas</option>
+            <option value="Escurecer">Escurecer</option>
+            <option value="Cobrir fios brancos">Cobrir fios brancos</option>
+            <option value="Mudar de tom / Tonalizar">Mudar de tom / Tonalizar</option>
+            <option value="Não pretendo mexer na cor">Não vou mexer na cor</option>
+          </select>
+        </div>
+
+        <!-- Histórico Químico -->
+        <div class="form-group">
+          <label for="select-history" class="form-label">Histórico de Química</label>
+          <select id="select-history" class="form-select">
+            <option value="">Possui química?</option>
+            <option value="Cabelo virgem (sem química)">Cabelo 100% virgem</option>
+            <option value="Já tenho mechas / luzes">Já tenho mechas / luzes</option>
+            <option value="Já tenho coloração / tintura">Já tenho coloração / tintura</option>
+            <option value="Progressiva / Botox / Alisamento">Progressiva / Botox / Alinhamento</option>
+            <option value="Mais de um procedimento químico">Mais de um procedimento</option>
+            <option value="Não tenho certeza">Não tenho certeza</option>
+          </select>
+        </div>
+
+        <!-- Observações Opcionais -->
+        <div class="form-group full-width">
+          <label for="textarea-notes" class="form-label">Observações ou Dúvidas (Opcional)</label>
+          <textarea id="textarea-notes" class="form-textarea" placeholder="Ex: 'Quero um loiro manteiga', 'tenho química antiga nas pontas', etc..." maxlength="300"></textarea>
+        </div>
+      </div>
+    </section>
+
+    <!-- PASSO 4: Resumo & Envio no WhatsApp -->
+    <section class="summary-card" id="summary-section">
+      <div class="section-title">
+        <span class="step-indicator">4</span>
+        <span>Prontinho para Enviar</span>
+      </div>
+
+      <div class="preview-box">
+        <div class="preview-label">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 6.46 17.5 2 12.04 2Z"/></svg>
+          <span>Mensagem Formatada do WhatsApp</span>
+        </div>
+        <div class="preview-bubble">
+          <div class="preview-text" id="whatsapp-preview-text">Preencha seu nome e escolha os serviços para ver a mensagem pronta aqui...</div>
+        </div>
+      </div>
+
+      <button type="button" class="btn-whatsapp" id="btn-send-whatsapp">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 6.46 17.5 2 12.04 2Z"/></svg>
+        <span>Enviar Pedido no WhatsApp</span>
+      </button>
+
+      <button type="button" class="btn-copy" id="btn-copy-text">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+        <span>Copiar Texto da Mensagem</span>
+      </button>
+
+      <p class="disclaimer-note">
+        💡 <strong>Importante:</strong> Ao clicar no botão, o WhatsApp abrirá com tudo preenchido. A Suellen confirmará a avaliação, valores e agendará a melhor data e horário com você!
+      </p>
+    </section>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <p>Suellen Bailon • Solari · WhatsApp: (14) 99806-3662</p>
+    </footer>
+
+  </div>
+
+  <!-- Barra Flutuante Mobile -->
+  <div class="floating-bar" id="mobile-floating-bar" style="display: none;">
+    <div class="floating-text-wrap">
+      <div class="floating-count" id="floating-items-count">0 serviço(s) marcado(s)</div>
+      <div class="floating-sub">Toque para enviar à Suellen</div>
+    </div>
+    <button type="button" class="floating-action-btn" id="btn-floating-send">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 6.46 17.5 2 12.04 2Z"/></svg>
+      <span>Enviar</span>
+    </button>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast-element"></div>
+
+  <!-- Scripts -->
+  <script src="js/catalog-data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
